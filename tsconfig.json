@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es2016",                               /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "removeComments": true,                           /* 타입스크립에서 자바스크립으로 넘어갈때 코멘트 삭제 */
+    "outDir": "./js",                                 /* 자바스크립 폴더 따로 생성*/
+  }
+}   
