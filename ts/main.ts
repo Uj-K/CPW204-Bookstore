@@ -2,9 +2,25 @@
  * Represents a individual book that can be purchased.
  */
 class Book {
+    /**
+     * The 13 digit ISBN number of the book.
+     */
     isbn : string;
+
+    /**
+     * The title of the book.
+     */
     title : string;
+
+    /**
+     * The retail price of the book.
+     */
     price : number;
+
+    /**
+     * The release date of the book.
+     * This could be a future date if the book has not been released yet.
+     */
     releaseDate : Date;
 }
 
