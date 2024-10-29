@@ -53,10 +53,36 @@ function processBook() {
  * This function will retrieve all the book data from the HTML page.
  * If all data is valid, a Book object will be returned. 
  * If any data is invalid, null will be returned.
+ * and error messages will be shown on the web pages.
  * (JavaScrip can have multiple return types)
  */
 function getBook():Book {
+    // Get all inputs
+    let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
+    let titleTextBox = document.querySelector("#title") as HTMLInputElement;
+    let priceTextBox = document.querySelector("#price") as HTMLInputElement;
+    let releaseDateTextBox = document.querySelector("#release-date") as HTMLInputElement;
 
+    // Validate data
+    let isValidData = true; // flag variable
+
+    // ISBN Validation
+
+    let isbn = isbnTextBox.value; // .value is always a string coming out of an inout element.
+    if (!isValidIsbn(isbn)) {
+        isValidData = false;
+        isbnTextBox.nextElementSibling.textContent = "ISBN must be 13 digits only";
+    }
+}
+
+/**
+ * This validate an ISBN 13 number
+ * @param data The string to be validated.
+ * @returns True if data is a valid ISBN 13
+ */
+function isValidIsbn(data: string) {
+    const isbn13Pattern = /^(97(8|9))?\d{9}(\d|X)$/; 
+    return isbn13Pattern.test(data);
 }
 
 /**

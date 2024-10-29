@@ -18,6 +18,20 @@ function processBook() {
     }
 }
 function getBook() {
+    let isbnTextBox = document.querySelector("#isbn");
+    let titleTextBox = document.querySelector("#title");
+    let priceTextBox = document.querySelector("#price");
+    let releaseDateTextBox = document.querySelector("#release-date");
+    let isValidData = true;
+    let isbn = isbnTextBox.value;
+    if (!isValidIsbn(isbn)) {
+        isValidData = false;
+        isbnTextBox.nextElementSibling.textContent = "ISBN must be 13 digits only";
+    }
 }
-function addBook() {
+function isValidIsbn(data) {
+    const isbn13Pattern = /^(97(8|9))?\d{9}(\d|X)$/;
+    return isbn13Pattern.test(data);
+}
+function addBook(b) {
 }
