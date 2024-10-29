@@ -73,6 +73,22 @@ function getBook():Book {
         isValidData = false;
         isbnTextBox.nextElementSibling.textContent = "ISBN must be 13 digits only";
     }
+
+    // Title Validation
+    let title = titleTextBox.value;
+    if (title.trim() == "") { // Trim the white spaces if there are,,
+        isValidData = false;
+        titleTextBox.nextElementSibling.textContent = "You must provide title"
+    }
+
+    // Price Validation
+    let price = parseFloat(priceTextBox.value);
+    if (isNaN(price) || price < 0) {
+        isValidData = false;
+        priceTextBox.nextElementSibling.textContent = "Price must be a positive number"
+    }
+
+
 }
 
 /**
@@ -84,6 +100,8 @@ function isValidIsbn(data: string) {
     const isbn13Pattern = /^(97(8|9))?\d{9}(\d|X)$/; 
     return isbn13Pattern.test(data);
 }
+
+
 
 /**
  * Add a Book object to web storage.
