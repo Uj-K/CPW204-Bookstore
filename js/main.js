@@ -38,6 +38,12 @@ function getBook() {
         isValidData = false;
         priceTextBox.nextElementSibling.textContent = "Price must be a positive number";
     }
+    let releaseDate = releaseDateTextBox.value;
+    let releaseDateCheck = Date.parse(releaseDate);
+    if (isNaN(releaseDateCheck)) {
+        isValidData = false;
+        releaseDateTextBox.nextElementSibling.textContent = "Release date must be a valid date";
+    }
 }
 function isValidIsbn(data) {
     const isbn13Pattern = /^(97(8|9))?\d{9}(\d|X)$/;
