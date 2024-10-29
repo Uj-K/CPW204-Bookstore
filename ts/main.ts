@@ -57,6 +57,8 @@ function processBook() {
  * (JavaScrip can have multiple return types)
  */
 function getBook():Book {
+    clearAllErrorMsg();
+
     // Get all inputs
     let isbnTextBox = document.querySelector("#isbn") as HTMLInputElement;
     let titleTextBox = document.querySelector("#title") as HTMLInputElement;
@@ -117,5 +119,21 @@ function isValidIsbn(data: string) {
  * @param b The book containing valid data to be added
  */
 function addBook(b:Book):void {
+
+}
+
+/**
+ * Clears all the validation error message spans in the form
+ */
+function clearAllErrorMsg() {
+    // Get all error spans
+    let allSpans = document.querySelectorAll("span.error-msg"); // Or you can do ("form span.error-msg");
+
+    // Loop through, and set empty string 
+    // There is one way with lambda function: allSpans.forEach(span => span.textContent = ""); 
+    for (let i = 0; i < allSpans.length; i++) {
+        let currentSpan = allSpans[i];
+        currentSpan.textContent = "";
+    }
 
 }
