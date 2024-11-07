@@ -103,10 +103,10 @@ function processBook() {
             and then explicitly recombine the components (year, month, day) 
             to prevent any timezone-related problems
             Date 객체를 직접적으로 생성하기 전에 날짜 값을 분리하고, 이를 명시적으로 재조합해서 시간대 문제를 피한다*/
-            const dateparts:string[] = releaseDate.split("-"); // .split method will split the string by "-"
-            const year = parseInt(dateparts[0]);
-            const month = parseInt(dateparts[1]) - 1; // because month are index based
-            const day = parseInt(dateparts[2]); // save the day as it is input
+            const dateParts:string[] = releaseDate.split("-"); // .split method will split the string by "-"
+            const year = parseInt(dateParts[0]);
+            const month = parseInt(dateParts[1]) - 1; // because month are index based
+            const day = parseInt(dateParts[2]); // save the day as it is input
             const correctDate = new Date(year, month, day);
 
             addedBook.releaseDate = new Date(correctDate);
