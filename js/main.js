@@ -53,8 +53,16 @@ function processBook() {
         return isbn13Pattern.test(data);
     }
     function addBook(b) {
-        alert("Data was valid, book added");
         console.log(b);
+        let bookDiv = document.createElement("div");
+        let titleHeading = document.createElement("h2");
+        titleHeading.textContent = `${b.title} : ${b.isbn}`;
+        bookDiv.appendChild(titleHeading);
+        let bookListDisplay = document.querySelector("#book-display");
+        bookListDisplay.appendChild(bookDiv);
+        let bookDescription = document.createElement("p");
+        bookDescription.textContent = `This book was released on ${b.releaseDate} and costs ${b.price}`;
+        bookDiv.appendChild(bookDescription);
     }
     function clearAllErrorMsg() {
         let allSpans = document.querySelectorAll("span.error-msg");

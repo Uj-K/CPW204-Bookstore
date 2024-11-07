@@ -115,13 +115,35 @@ function processBook() {
 
 
     /**
-     * Add a Book object to web storage.
+     * Add a Book object to the web page and to web storage.
      * Assumes all data is valid.
      * @param b The book containing valid data to be added
      */
     function addBook(b: Book): void {
-        alert("Data was valid, book added");
         console.log(b);
+
+        // Add the book the web page;
+        let bookDiv:HTMLDivElement = document.createElement("div"); 
+
+        let titleHeading:HTMLHeadingElement = document.createElement("h2");
+        titleHeading.textContent = `${b.title} : ${b.isbn}`; // need backtick(`)
+
+        // Add h2 to book div <div><h2> Title : ISBN </h2></div>
+        bookDiv.appendChild(titleHeading); 
+
+        // add bookDiv to web page
+
+        let bookListDisplay = document.querySelector("#book-display")
+        bookListDisplay.appendChild(bookDiv); // Add the newly created book
+
+        // you can make one lind the two above line. 
+        // document.querySelector("#book-display").appendChild(bookDiv);
+
+        let bookDescription:HTMLParagraphElement = document.createElement("p");
+        bookDescription.textContent = `This book was released on ${b.releaseDate} and costs ${b.price}`;
+        bookDiv.appendChild(bookDescription);
+
+
     }
 
     /**

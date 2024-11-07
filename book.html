@@ -18,17 +18,17 @@
     <h2>Add a Book</h2>
     <form>
         <label for="isbn">ISBN</label>
-        <input id="isbn" type="text">
+        <input id="isbn" type="text" value="9781101906118">
         <span class="error-msg"></span>
         <br>
 
         <label for="title">Title</label>
-        <input id="title" type="text">
+        <input id="title" type="text" value="The Vegetarian">
         <span class="error-msg"></span>
         <br>
 
         <label for="price">Price</label>
-        <input id="price" type="number" step=".01">
+        <input id="price" type="number" step=".01" value="20.70">
         <span class="error-msg"></span>
         <br>
 
@@ -38,8 +38,9 @@
         <br>
 
         <button type="button" id="add-book">Submit Book</button>
-
     </form>    
+    <!-- Book added will be nested within -->
+    <div id = "book-display"></div>
     
 </body>
 </html>
