@@ -61,7 +61,12 @@ function processBook() {
         let bookListDisplay = document.querySelector("#book-display");
         bookListDisplay.appendChild(bookDiv);
         let bookDescription = document.createElement("p");
-        bookDescription.textContent = `This book was released on ${b.releaseDate} and costs ${b.price}`;
+        const currencyFormatter = new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "USD",
+        });
+        let formattedPrice = currencyFormatter.format(b.price);
+        bookDescription.textContent = `This book was released on ${b.releaseDate} and costs ${formattedPrice}`;
         bookDiv.appendChild(bookDescription);
     }
     function clearAllErrorMsg() {
