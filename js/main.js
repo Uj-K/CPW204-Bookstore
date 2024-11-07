@@ -43,7 +43,12 @@ function processBook() {
             addedBook.isbn = isbn;
             addedBook.title = title;
             addedBook.price = price;
-            addedBook.releaseDate = new Date(releaseDate);
+            const dateparts = releaseDate.split("-");
+            const year = parseInt(dateparts[0]);
+            const month = parseInt(dateparts[1]) - 1;
+            const day = parseInt(dateparts[2]);
+            const correctDate = new Date(year, month, day);
+            addedBook.releaseDate = new Date(correctDate);
             return addedBook;
         }
         return null;
