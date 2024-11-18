@@ -77,24 +77,16 @@ function processBook() {
     function addBookToStorage(b) {
         const BookStorageKey = "Books";
         let bookData = localStorage.getItem(BookStorageKey);
-        if (bookData == null) {
-            let books = [];
-            books.push(b);
-            bookData = JSON.stringify(books);
-            localStorage.setItem(BookStorageKey, bookData);
-        }
-        else {
-            let books = JSON.parse(bookData);
-            books.push(b);
-            bookData = JSON.stringify(books);
-            localStorage.setItem(BookStorageKey, bookData);
-        }
+        let books = bookData ? JSON.parse(bookData) : [];
+        books.push(b);
+        bookData = JSON.stringify(books);
+        localStorage.setItem(BookStorageKey, bookData);
     }
-    function clearAllErrorMsg() {
-        let allSpans = document.querySelectorAll("span.error-msg");
-        for (let i = 0; i < allSpans.length; i++) {
-            let currentSpan = allSpans[i];
-            currentSpan.textContent = "";
-        }
+}
+function clearAllErrorMsg() {
+    let allSpans = document.querySelectorAll("span.error-msg");
+    for (let i = 0; i < allSpans.length; i++) {
+        let currentSpan = allSpans[i];
+        currentSpan.textContent = "";
     }
 }

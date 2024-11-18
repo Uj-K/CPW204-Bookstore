@@ -102,7 +102,7 @@ function processBook() {
             and then explicitly recombine the components (year, month, day) 
             to prevent any timezone-related problems
             Date 객체를 직접적으로 생성하기 전에 날짜 값을 분리하고, 이를 명시적으로 재조합해서 시간대 문제를 피한다*/
-            const dateParts:string[] = releaseDate.split("-"); // .split method will split the string by "-"
+            const dateParts: string[] = releaseDate.split("-"); // .split method will split the string by "-"
             const year = parseInt(dateParts[0]);
             const month = parseInt(dateParts[1]) - 1; // because month are index based
             const day = parseInt(dateParts[2]); // save the day as it is input
@@ -134,17 +134,17 @@ function processBook() {
      * Assumes all data is valid
      * @param b The book containing valid data to be added
      */
-    function addBookToWebpage(b:Book):void {
+    function addBookToWebpage(b: Book): void {
         console.log(b);
 
         // Add the book the web page;
-        let bookDiv:HTMLDivElement = document.createElement("div"); 
+        let bookDiv: HTMLDivElement = document.createElement("div");
 
-        let titleHeading:HTMLHeadingElement = document.createElement("h2");
+        let titleHeading: HTMLHeadingElement = document.createElement("h2");
         titleHeading.textContent = `${b.title} : ${b.isbn}`; // need backtick(`)
 
         // Add h2 to book div <div><h2> Title : ISBN </h2></div>
-        bookDiv.appendChild(titleHeading); 
+        bookDiv.appendChild(titleHeading);
 
         // add bookDiv to web page
 
@@ -154,9 +154,9 @@ function processBook() {
         // you can make one lind the two above line. 
         // document.querySelector("#book-display").appendChild(bookDiv);
 
-        let bookDescription:HTMLParagraphElement = document.createElement("p");
+        let bookDescription: HTMLParagraphElement = document.createElement("p");
         const currencyFormatter = new Intl.NumberFormat("en-US", {
-            style: "currency", 
+            style: "currency",
             currency: "USD",
 
         });
@@ -172,10 +172,26 @@ function processBook() {
      * If no books are currently stored a new list will be created and stored
      * @param b The book that will be added to localStorage
      */
-    function addBookToStorage(b:Book):void {
+    function addBookToStorage(b: Book): void {
         const BookStorageKey = "Books"
         // Read existing books out of storage
         let bookData = localStorage.getItem(BookStorageKey);
+
+        // JS Ternary Operator, if - else 한줄 표현
+        // Syntax =        condition ?   value, if true     :   value, if false
+        // Initialize with existing bookData is not null, or empty array if null
+        let books: Book[] = bookData ? JSON.parse(bookData) : []; 
+        
+        // Add the new book to the list
+        books.push(b);
+
+        // Store the updated list back in localStorage
+        bookData = JSON.stringify(books);
+        localStorage.setItem(BookStorageKey, bookData);
+        // 위에 두줄 이렇게 한줄로 줄일수도 있음
+        // localStorage.setItem(BookStorageKey, JSON.stringify(books));
+
+        /* old code before refactor
         // if bookData is null, the "Books" key did not exist
         if (bookData == null) {
             // Create a new list and add our current book
@@ -195,21 +211,21 @@ function processBook() {
             // Add back to localStorage
             bookData = JSON.stringify(books);
             localStorage.setItem(BookStorageKey, bookData);
-        }
-
+            */
     }
-    /**
-     * Clears all the validation error message spans in the form
-     */
-    function clearAllErrorMsg() {
-        // Get all error spans
-        let allSpans = document.querySelectorAll("span.error-msg"); // Or you can do ("form span.error-msg");
 
-        // Loop through, and set empty string 
-        // There is one way with lambda function: allSpans.forEach(span => span.textContent = ""); 
-        for (let i = 0; i < allSpans.length; i++) {
-            let currentSpan = allSpans[i];
-            currentSpan.textContent = "";
-        }
+}
+/**
+ * Clears all the validation error message spans in the form
+ */
+function clearAllErrorMsg() {
+    // Get all error spans
+    let allSpans = document.querySelectorAll("span.error-msg"); // Or you can do ("form span.error-msg");
+
+    // Loop through, and set empty string 
+    // There is one way with lambda function: allSpans.forEach(span => span.textContent = ""); 
+    for (let i = 0; i < allSpans.length; i++) {
+        let currentSpan = allSpans[i];
+        currentSpan.textContent = "";
     }
 }
