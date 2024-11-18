@@ -84,6 +84,10 @@ function processBook() {
             localStorage.setItem(BookStorageKey, bookData);
         }
         else {
+            let books = JSON.parse(bookData);
+            books.push(b);
+            bookData = JSON.stringify(books);
+            localStorage.setItem(BookStorageKey, bookData);
         }
     }
     function clearAllErrorMsg() {
