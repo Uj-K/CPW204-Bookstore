@@ -5,10 +5,10 @@ window.onload = function () {
     addBookBtn.onclick = processBook;
 };
 function processBook() {
-    console.log("processBook was called");
     let userBook = getBook();
     if (userBook != null) {
-        addBook(userBook);
+        addBookToWebpage(userBook);
+        addBookToStorage(userBook);
     }
     function getBook() {
         clearAllErrorMsg();
@@ -57,7 +57,7 @@ function processBook() {
         const isbn13Pattern = /^(97(8|9))?\d{9}(\d|X)$/;
         return isbn13Pattern.test(data);
     }
-    function addBook(b) {
+    function addBookToWebpage(b) {
         console.log(b);
         let bookDiv = document.createElement("div");
         let titleHeading = document.createElement("h2");
@@ -73,6 +73,18 @@ function processBook() {
         let formattedPrice = currencyFormatter.format(b.price);
         bookDescription.textContent = `This book was released on ${b.releaseDate} and costs ${formattedPrice}`;
         bookDiv.appendChild(bookDescription);
+    }
+    function addBookToStorage(b) {
+        const BookStorageKey = "Books";
+        let bookData = localStorage.getItem(BookStorageKey);
+        if (bookData == null) {
+            let books = [];
+            books.push(b);
+            bookData = JSON.stringify(books);
+            localStorage.setItem(BookStorageKey, bookData);
+        }
+        else {
+        }
     }
     function clearAllErrorMsg() {
         let allSpans = document.querySelectorAll("span.error-msg");
